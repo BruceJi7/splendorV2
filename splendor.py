@@ -10,18 +10,28 @@ deck1 = cards.deckLVL1.copy()
 
 random.shuffle(deck1)
 
-card1 = deck1[0]
-card2 = deck1[1]
-card3 = deck1[2]
-card4 = deck1[3]
+tableCards = deck1[0:4]
+
 
 player1 = player.player('Toby')
 
 player1.addToken(red, 5)
+player1.addToken(green, 5)
+player1.addToken(blue, 5)
+player1.addToken(white, 5)
+player1.addToken(black, 5)
+
+def setTableCards(deck):
+
+    tableCards = []
+    for _ in range(4):
+        selectedCard = random.choice(deck)
+        tableCards.append(selectedCard)
+        deck.remove(selectedCard)
+    return tableCards
 
 
-
-def purchaseCard(player, card):
+def canPurchaseCard(player, card):
     cardRequirements = card.easyRequirements
     playerTokens = player.tokens
 
@@ -30,9 +40,22 @@ def purchaseCard(player, card):
         playerColorCount = playerTokens[color]
 
         if cardColorRequirement > playerColorCount:
-            return False, player
-        else:
-            player.tokens[color] - card.easyRequirements[color]
-    player.addCard(card)
-    return True, player
+            return False
+    return True        
 
+def purchaseCard(player, card):
+    if canPurchaseCard(player, card):
+        for color in card.easyRequirements.keys():
+            player.tokens[color] -= card.easyRequirements[color]
+        player.addCard(card)
+    return player
+
+print(len(deck1))
+tableLv1Cards = setTableCards(deck1)
+print(len(deck1))
+print(tableLv1Cards)
+# print(player1.cards)
+# print(player1.tokens)
+# player1 = purchaseCard(player1, oneCard)
+# print(player1.cards)
+# print(player1.tokens)
