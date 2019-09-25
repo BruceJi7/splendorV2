@@ -69,10 +69,10 @@ class player():
 
 player1 = player('Toby')
 
-print(player1.name)
-print(player1.tokens)
-player1.addToken(red, 5)
-print(player1.tokens)
-print(player1.tellScore())
-print(player1.tokens[red])
-print(player1.getTotalTokens())
+# print(player1.name)
+# print(player1.tokens)
+# player1.addToken(red, 5)
+# print(player1.tokens)
+# print(player1.tellScore())
+# print(player1.tokens[red])
+# print(player1.getTotalTokens())

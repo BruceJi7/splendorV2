@@ -41,9 +41,6 @@ for cardColour in cardsFromLibrary.keys():
         deckLVL1.append(asCardObject)
 
 
-for cardItem in deckLVL1:
-    print(cardItem)
-
 
 
 
