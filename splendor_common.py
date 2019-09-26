@@ -21,22 +21,18 @@ def setTableTokens(playerCount):
     return outTokenPile
 
 
-def setFaceUpCards(inDeck):
-    tableDeck = random.choices(inDeck, k=4)
-    for card in tableDeck:
-        try:
-            inDeck.remove(card)
-        except:
-            print(f'Tried to remove card: {card}.')
-            print(f'Result is faceUpCards: {len(tableDeck)}, and {len(inDeck)} cards remaining in the deck.')
-    print(f'Table is set, {len(tableDeck)} cards face up, {len(inDeck)} cards remaining in the deck.')
-    return tableDeck, inDeck
+def setFaceUpCards(shuffledDeck):
+    tableDeck = shuffledDeck[0:4]
+    shuffledDeck = shuffledDeck[4:]
+    print(f'There are {len(tableDeck)} face up cards and {len(shuffledDeck)} shuffled cards.')
+    
+    return tableDeck, shuffledDeck
 
 def replaceFaceUpCard(cardToRemove, faceUpCards, inDeck):
+    cardIndex = faceUpCards.index(cardToRemove)
     faceUpCards.remove(cardToRemove)
-    newCard = random.choice(inDeck)
-    inDeck.remove(newCard)
-    faceUpCards.append(newCard)
+    newCard = inDeck.pop()
+    faceUpCards.insert(cardIndex, newCard)
     return faceUpCards, inDeck
 
 
