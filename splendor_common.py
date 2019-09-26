@@ -1,5 +1,7 @@
-# At first, I will write functions I expect to need here:
+import random
 
+
+# At first, I will write functions I expect to need here:
 red, green, blue, white, black, yellow = 'red', 'green', 'blue', 'white', 'black', 'yellow'
 
 
@@ -17,6 +19,27 @@ def setTableTokens(playerCount):
             color += offset
     outTokenPile[yellow] = 5
     return outTokenPile
+
+
+def setFaceUpCards(inDeck):
+    tableDeck = random.choices(inDeck, k=4)
+    for card in tableDeck:
+        try:
+            inDeck.remove(card)
+        except:
+            print(f'Tried to remove card: {card}.')
+            print(f'Result is faceUpCards: {len(tableDeck)}, and {len(inDeck)} cards remaining in the deck.')
+    print(f'Table is set, {len(tableDeck)} cards face up, {len(inDeck)} cards remaining in the deck.')
+    return tableDeck, inDeck
+
+def replaceFaceUpCard(cardToRemove, faceUpCards, inDeck):
+    faceUpCards.remove(cardToRemove)
+    newCard = random.choice(inDeck)
+    inDeck.remove(newCard)
+    faceUpCards.append(newCard)
+    return faceUpCards, inDeck
+
+
 
 
 # Can the player pick up two of a colour?

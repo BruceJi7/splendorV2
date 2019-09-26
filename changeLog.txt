@@ -1,0 +1,9 @@
+19/09/26 12:30
+
+Adding in table deck system, and the ablility to remove cards from table's face up cards and replace them, which is combined with the purchase function.
+
+Currently the card setting function uses random choice to extract 4 cards, and for some reason sometimes chooses cards not in the deck? Very odd error.
+But in real life games you don't randomly take the cards, you take them from the top.
+Thus, I can remove this random element here and hopefully remove this bug.
+
+TODO: Change the card setting function to use .pop() and not .remove(). Don't use random.

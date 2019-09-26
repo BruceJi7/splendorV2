@@ -8,11 +8,23 @@ red, green, blue, white, black, yellow = 'red', 'green', 'blue', 'white', 'black
 
 
 deck1 = cards.deckLVL1.copy()
+deck2 = cards.deckLVL2.copy()
+deck3 = cards.deckLVL3.copy()
+
 
 random.shuffle(deck1)
+random.shuffle(deck2)
+random.shuffle(deck3)
 
-tableCards = deck1[0:4]
 tableTokens = table.setTableTokens(2)
+
+faceUpLv1Cards, tableDeck1 = table.setFaceUpCards(deck1)
+
+
+
+
+
+
 
 
 player1 = player.player('Toby')
@@ -23,15 +35,9 @@ player1.addToken(blue, 5)
 player1.addToken(white, 5)
 player1.addToken(black, 5)
 
-def setTableCards(deck):
-
-    tableCards = []
-    for _ in range(4):
-        selectedCard = random.choice(deck)
-        tableCards.append(selectedCard)
-        deck.remove(selectedCard)
-    return tableCards
-
+def testPrintCards(deck):
+    for card in deck:
+        print(card)
 
 def isCardPurchasePossible(player, card):
     cardRequirements = card.easyRequirements
@@ -45,13 +51,16 @@ def isCardPurchasePossible(player, card):
             return False
     return True        
 
-def purchaseCard(player, card, tableTokens):
+def purchaseCard(player, card, tableTokens, faceUpCards, sourceDeck):
     if isCardPurchasePossible(player, card):
-        for color in card.easyRequirements.keys():
+        for color in card.easyRequirements.keys(): #Take the tokens from the player
             player.tokens[color] -= card.easyRequirements[color]
-            tableTokens[color] += card.easyRequirements[color]
-        player.addCard(card)
-    return player, tableTokens
+            tableTokens[color] += card.easyRequirements[color] #Return tokens to table
+        player.addCard(card) #Give card to player
+    
+    faceUpCards, sourceDeck = table.replaceFaceUpCard(card, faceUpCards, sourceDeck)
+
+    return player, tableTokens, faceUpCards, sourceDeck
 
 # print(len(deck1))
 # tableLv1Cards = setTableCards(deck1)
@@ -61,7 +70,7 @@ def purchaseCard(player, card, tableTokens):
 
 print(player1.cards)
 print(player1.tokens)
-player1, tableTokens = purchaseCard(player1, tableCards[0], tableTokens)
+player1, tableTokens, faceUpLv1Cards, tableDeck1 = purchaseCard(player1, faceUpLv1Cards[0], tableTokens, faceUpLv1Cards, tableDeck1)
 print(player1.cards)
 print(player1.tokens)
 print(tableTokens)

@@ -31,14 +31,31 @@ class card():
 
 
 
-cardsFromLibrary = cardLibrary.cardsInDeckLv1
+deck1RawData = cardLibrary.cardsInDeckLv1
+deck2RawData = cardLibrary.cardsInDeckLv2
+deck3RawData = cardLibrary.cardsInDeckLv3
 
 
 deckLVL1 = []
-for cardColour in cardsFromLibrary.keys():
-    for cardData in cardsFromLibrary[cardColour].values():
+for cardColour in deck1RawData.keys():
+    for cardData in deck1RawData[cardColour].values():
         asCardObject = card(cardColour, cardData['requirements'], cardData['points'])
         deckLVL1.append(asCardObject)
+
+deckLVL2 = []
+for cardColour in deck2RawData.keys():
+    for cardData in deck2RawData[cardColour].values():
+        asCardObject = card(cardColour, cardData['requirements'], cardData['points'])
+        deckLVL2.append(asCardObject)
+
+deckLVL3 = []
+for cardColour in deck3RawData.keys():
+    for cardData in deck3RawData[cardColour].values():
+        asCardObject = card(cardColour, cardData['requirements'], cardData['points'])
+        deckLVL3.append(asCardObject)
+
+
+
 
 
 
