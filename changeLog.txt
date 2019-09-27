@@ -1,3 +1,14 @@
+TODO: Player's cards should count towards purchasing. Add this functionality.
+
+
+19/09/27 11:33
+
+Added comprehensive token pick up function.
+The function will reject any illegal pick up - red, red, green, or three reds, for example
+As well as rejecting if you have too many tokens.
+
+The previous task to change the table card setting function to use pop has been completed.
+
 19/09/26 12:30
 
 Adding in table deck system, and the ablility to remove cards from table's face up cards and replace them, which is combined with the purchase function.

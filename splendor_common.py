@@ -20,7 +20,7 @@ def setTableTokens(playerCount):
     outTokenPile[yellow] = 5
     return outTokenPile
 
-
+# setFaceUpCards - initialise the face up cards for one deck. Select the first 4 cards from the shuffled deck, remove them, and add them to face up cards.
 def setFaceUpCards(shuffledDeck):
     tableDeck = shuffledDeck[0:4]
     shuffledDeck = shuffledDeck[4:]
@@ -28,6 +28,11 @@ def setFaceUpCards(shuffledDeck):
     
     return tableDeck, shuffledDeck
 
+
+
+### Action functions
+
+#replaceFaceUpCard - Given a specific card from the faceUpCards deck, remove it from the deck, and put a new card in that position.
 def replaceFaceUpCard(cardToRemove, faceUpCards, inDeck):
     cardIndex = faceUpCards.index(cardToRemove)
     faceUpCards.remove(cardToRemove)
@@ -35,7 +40,34 @@ def replaceFaceUpCard(cardToRemove, faceUpCards, inDeck):
     faceUpCards.insert(cardIndex, newCard)
     return faceUpCards, inDeck
 
-
+def pickUpTokens(player, tableTokens, *args):
+    playerPickupAllowance = player.getPickupQuant()
+    if len(args) <= playerPickupAllowance:
+        if len(args) == 3 and len(set(args)) == 1:
+            print('You cannot pick up three tokens of the same colour')
+            return player, tableTokens
+        elif len(args) == 3 and len(set(args)) == 2:
+            print('You cannot pick up three tokens if two tokens are the same colour')
+            return player, tableTokens
+        else:
+            if len(args) == 2 and args[0] == args[1]:
+                if canPlayerPickUpTwo(args[0], tableTokens):
+                    player.addToken(args[0], 2)
+                    tableTokens[args[0]] -= 2
+                    print(f'You picked up two {args[0]} tokens.')
+                    return player, tableTokens
+                else:
+                    print(f'There are not enough {args[0]} coloured tokens to pick up two.')
+                    return player, tableTokens
+            else:
+                for color in args:
+                    player.addToken(color, 1)
+                    tableTokens[color] -= 1
+                print(f'You picked up {args} tokens')
+                return player, tableTokens
+    else:
+        print(f'You cannot pick up that many tokens. You have {player.getTotalTokens()} tokens already. You may pick up {playerPickupAllowance} token(s).')
+        return player, tableTokens
 
 
 # Can the player pick up two of a colour?
@@ -44,5 +76,3 @@ def canPlayerPickUpTwo(color, tableTokens):
         return True
     else:
         return False
-
-
