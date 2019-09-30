@@ -122,27 +122,33 @@ def collectNoble(player, noblesDeck):
 
 # # Testing the player purchase cards functions:
 
-# print('The player has the following cards:')
-# print(player1.cards)
-# print('The player has the following tokens')
-# print(player1.tokens)
-# print('There are the following cards on the table:')
-# for number, card in enumerate(faceUpLv1Cards):
-#     print(f'\t{number}: {card}')
-# print('The player will now buy a card.')
-# player1, tableTokens, faceUpLv1Cards, tableDeck1 = purchaseCard(player1, faceUpLv1Cards[1], tableTokens, faceUpLv1Cards, tableDeck1)
-# print('The player now has the following cards:')
-# print(player1.cards)
-# print('And the following tokens.')
-# print(player1.tokens)
-# print('And now the face up cards are as follows:')
-# for number, card in enumerate(faceUpLv1Cards):
-#     print(f'\t{number}: {card}')
+print('The player has the following cards:')
+print(player1.cards)
+print('The player has the following tokens')
+print(player1.tokens)
+print('There are the following cards on the table:')
+for number, card in enumerate(faceUpLv1Cards):
+    print(f'\t{number}: {card}')
+print('The player will now buy a card.')
+player1, tableTokens, faceUpLv1Cards, tableDeck1 = purchaseCard(player1, faceUpLv1Cards[1], tableTokens, faceUpLv1Cards, tableDeck1)
+print('The player now has the following cards:')
+print(player1.cards)
+print('And the following tokens.')
+print(player1.tokens)
+print('And now the face up cards are as follows:')
+for number, card in enumerate(faceUpLv1Cards):
+    print(f'\t{number}: {card}')
 
-# print("The player's card buying power is now:")
-# print(player1.getCardCount())
-# print("And the player's total buying power is now:")
-# print(player1.getCombinedWallet())
+print("The player's card buying power is now:")
+print(player1.getCardCount())
+print("And the player's total buying power is now:")
+print(player1.getCombinedWallet())
+print(f'The player has {player1.getPrestige()} points now.')
+print('Cheating a noble into the player inventory:')
+player1.addNoble(tableNobles[1])
+player1.addNoble(tableNobles[0])
+print(player1.nobles)
+print(player1.getPrestige())
 
 #Testing the player picking up tokens functions
 
@@ -154,6 +160,6 @@ def collectNoble(player, noblesDeck):
 # print('And there are now the following tokens on the table:')
 # print(tableTokens)
 
-print('The nobles present in this game are:')
-for noble in tableNobles:
-    print(f'\t{noble.name}')
+# print('The nobles present in this game are:')
+# for noble in tableNobles:
+#     print(f'\t{noble.name}')
