@@ -1,4 +1,9 @@
-TODO: Player's cards should count towards purchasing. Add this functionality.
+TODO: Add noble collection function
+
+
+19/09/30 11:30
+
+Player's card now counts towards what they can buy.
 
 
 19/09/27 11:33
