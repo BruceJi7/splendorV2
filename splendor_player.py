@@ -12,7 +12,7 @@ emptyTokenWallet = {
 
 
 class player():
-    def __init__(self, name, prestigePoints=0,  nobles=[], cards=[], reservedCards=[], tokens=emptyTokenWallet):
+    def __init__(self, name, prestigePoints=0,  nobles=[], cards=[], reservedCards=[], tokens=emptyTokenWallet.copy()):
         self.name = name
         self.prestigePoints = prestigePoints
         self.nobles = nobles
@@ -63,7 +63,18 @@ class player():
         else:
             return 0
     
-
+    def getCardCount(self):
+        if self.cards:
+            cardCount = emptyTokenWallet.copy()
+            for card in self.cards:
+                cardCount[card.color] += 1
+            return cardCount
+    
+    def getCombinedWallet(self):
+        combinedWallet = emptyTokenWallet.copy()
+        for color in combinedWallet.keys():
+            combinedWallet[color] = self.tokens[color] + self.getCardCount()[color]
+        return combinedWallet
 
 
 
