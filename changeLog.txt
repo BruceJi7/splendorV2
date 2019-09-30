@@ -1,5 +1,10 @@
-TODO: Add noble collection function
+TODO: Test functions, write win condition.
 
+
+19/09/30 12:11
+
+Added noble collection function.
+It needs testing properly, but it should work.
 
 19/09/30 11:30
 
