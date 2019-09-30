@@ -35,7 +35,7 @@ def testPrintCards(deck):
 
 def isCardPurchasePossible(player, card):
     cardRequirements = card.easyRequirements
-    playerTokens = player.tokens
+    playerTokens = player.getCombinedWallet()
 
     for color in cardRequirements.keys():
         cardColorRequirement = cardRequirements[color]
@@ -48,8 +48,13 @@ def isCardPurchasePossible(player, card):
 def purchaseCard(player, card, tableTokens, faceUpCards, sourceDeck):
     if isCardPurchasePossible(player, card):
         for color in card.easyRequirements.keys(): #Take the tokens from the player
-            player.tokens[color] -= card.easyRequirements[color]
-            tableTokens[color] += card.easyRequirements[color] #Return tokens to table
+            tokensToTake = card.easyRequirements[color] - player.getCardCount()[color]
+            if tokensToTake <= 0:
+                print(f'The player has enough cards to cover the {color} cost.')
+                continue
+            else:
+                player.tokens[color] -= tokensToTake
+                tableTokens[color] += tokensToTake #Return tokens to table
         player.addCard(card) #Give card to player
     
     faceUpCards, sourceDeck = table.replaceFaceUpCard(card, faceUpCards, sourceDeck)

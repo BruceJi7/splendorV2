@@ -64,11 +64,11 @@ class player():
             return 0
     
     def getCardCount(self):
+        cardCount = emptyTokenWallet.copy()
         if self.cards:
-            cardCount = emptyTokenWallet.copy()
             for card in self.cards:
                 cardCount[card.color] += 1
-            return cardCount
+        return cardCount
     
     def getCombinedWallet(self):
         combinedWallet = emptyTokenWallet.copy()
