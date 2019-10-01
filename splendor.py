@@ -2,7 +2,8 @@ import splendor_cards as cards
 import splendor_nobles as nobles
 import splendor_player as player
 import splendor_common as table
-import random
+from splendor_gameUtils import *
+import random, time, sys
 import pygame
 from pygame.locals import *
 
@@ -117,6 +118,23 @@ def collectNoble(player, noblesDeck):
 
 ### PYGAME FUNCTIONS ###
 
+
+
+
+def main():
+    pygame.init()
+    FPSCLOCK = pygame.time.Clock()
+    DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
+    pygame.display.set_caption('SPLENDOR')
+    while True:
+        DISPLAYSURF.fill(LIGHTYELLOW)
+        pygame.display.update()
+        checkForQuit()
+        FPSCLOCK.tick(FPS)
+
+
+
+
 # # Demo game loop:
 # print('Setting the table...')
 
@@ -148,7 +166,8 @@ def collectNoble(player, noblesDeck):
 
 
 
-
+if __name__ == "__main__":
+    main()
 
 
 
