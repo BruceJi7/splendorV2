@@ -10,7 +10,8 @@ class noble():
         return(f"noble('{self.name}', '{self.requirements}')")
 
     def __str__(self):
-        return(f'{self.name}')
+
+        return(f'{self.name}, who requires {self.requirements}')
 
 #statics:
 # colours

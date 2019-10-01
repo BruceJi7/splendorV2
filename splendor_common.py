@@ -24,7 +24,7 @@ def setTableTokens(playerCount):
 def setFaceUpCards(shuffledDeck):
     tableDeck = shuffledDeck[0:4]
     shuffledDeck = shuffledDeck[4:]
-    print(f'There are {len(tableDeck)} face up cards and {len(shuffledDeck)} shuffled cards.')
+    # print(f'There are {len(tableDeck)} face up cards on the table and {len(shuffledDeck)} remaining cards in the deck.')
     
     return tableDeck, shuffledDeck
 
@@ -34,10 +34,14 @@ def setFaceUpCards(shuffledDeck):
 
 #replaceFaceUpCard - Given a specific card from the faceUpCards deck, remove it from the deck, and put a new card in that position.
 def replaceFaceUpCard(cardToRemove, faceUpCards, inDeck):
-    cardIndex = faceUpCards.index(cardToRemove)
-    faceUpCards.remove(cardToRemove)
-    newCard = inDeck.pop()
-    faceUpCards.insert(cardIndex, newCard)
+    if inDeck:
+        cardIndex = faceUpCards.index(cardToRemove)
+        faceUpCards.remove(cardToRemove)
+        newCard = inDeck.pop()
+        faceUpCards.insert(cardIndex, newCard)
+        print(f'A new card, {newCard}, has been added to the table.')
+    else:
+        print('The deck is empty; no more cards can be put on the table.')
     return faceUpCards, inDeck
 
 def pickUpTokens(player, tableTokens, *args):

@@ -1,4 +1,10 @@
-TODO: Test functions, write win condition.
+TODO: Create pygame init
+
+19/10/01 11:05
+
+Nobles functions work well.
+I think the other functions work well based on previous testing.
+Commence pygame integration.
 
 
 19/09/30 12:11
