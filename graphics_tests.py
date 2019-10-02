@@ -17,7 +17,7 @@ tableTokens = {
 }
 
 
-redTokenSurf = pygame.Surface((60,70))
+redTokenSurf = pygame.Surface((60,70), pygame.SRCALPHA)
 redTokenRect = redTokenSurf.get_rect()
 redTokenRect.topleft = (100,100)
 
@@ -41,7 +41,7 @@ def drawTokens(asurface, tokens):
             pygame.draw.circle(redTokenSurf, LIGHTRED, (30,tokenYPos), 30)
             pygame.draw.circle(redTokenSurf, RED, (30,tokenYPos), 30, 1)
             # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
-        redTokenSurf.convert_alpha()
+
         asurface.blit(redTokenSurf, redTokenRect)
 
     if greenTokens:
@@ -53,9 +53,9 @@ def drawTokens(asurface, tokens):
             pygame.draw.circle(asurface, GREEN, (200,tokenYPos), 30, 1)
             # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
 def drawTokenAtMouse(x,y, color, asurface):
-    movingTokenSurf = pygame.Surface((60, 60))
-    movingTokensurf = movingTokenSurf.convert_alpha()
-    movingTokenSurf.fill(NOCOLOUR)
+    movingTokenSurf = pygame.Surface((60, 60), pygame.SRCALPHA)
+    # movingTokensurf = movingTokenSurf.convert_alpha()
+    # movingTokenSurf.fill(NOCOLOUR)
     movingTokenRect = movingTokenSurf.get_rect()
     movingTokenRect.center = (x, y)
     if color == red:
