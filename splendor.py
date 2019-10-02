@@ -21,7 +21,7 @@ random.shuffle(deck2)
 random.shuffle(deck3)
 
 # Set tokens on table, for 2 players
-tableTokens = table.setTableTokens(2)
+tableTokens = table.setTableTokens(5)
 
 
 # Set 3 nobles on the table
@@ -118,6 +118,30 @@ def collectNoble(player, noblesDeck):
 
 ### PYGAME FUNCTIONS ###
 
+def drawTokens(asurface, tokens):
+    redTokens = tokens[red]
+    greenTokens = tokens[green]
+    blueTokens = tokens[blue]
+    whiteTokens = tokens[white]
+    blackTokens = tokens[black]
+
+    if redTokens:
+        for token in range(redTokens):
+            baseYPos = 100
+            tokenYPos = baseYPos - (3*token)
+            
+            pygame.draw.circle(asurface, LIGHTRED, (100,tokenYPos), 30)
+            pygame.draw.circle(asurface, RED, (100,tokenYPos), 30, 2)
+            # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
+
+    if greenTokens:
+        for token in range(greenTokens):
+            baseYPos = 100
+            tokenYPos = baseYPos - (3*token)
+            
+            pygame.draw.circle(asurface, LIGHTGREEN, (200,tokenYPos), 30)
+            pygame.draw.circle(asurface, GREEN, (200,tokenYPos), 30, 2)
+            # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
 
 
 
@@ -127,7 +151,8 @@ def main():
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     pygame.display.set_caption('SPLENDOR')
     while True:
-        DISPLAYSURF.fill(LIGHTYELLOW)
+        DISPLAYSURF.fill(BLACK)
+        drawTokens(DISPLAYSURF, tableTokens)
         pygame.display.update()
         checkForQuit()
         FPSCLOCK.tick(FPS)

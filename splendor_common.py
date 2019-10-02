@@ -16,7 +16,7 @@ def setTableTokens(playerCount):
     if playerCount >4:
         offset = playerCount-4
         for color in outTokenPile.keys():
-            color += offset
+            outTokenPile[color] += offset
     outTokenPile[yellow] = 5
     return outTokenPile
 
