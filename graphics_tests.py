@@ -8,40 +8,69 @@ from splendor_gameUtils import *
 
 
 
-def drawTokens(asurface, tokens):
+def drawTableTokens(asurface, tokens):
     redTokens = tokens[red]
     greenTokens = tokens[green]
     blueTokens = tokens[blue]
     whiteTokens = tokens[white]
     blackTokens = tokens[black]
-
     
-
-
     if redTokens:
-        redTokenSurf.fill(BLACK)     
+        tableRedTokenSurf.fill(NOCOLOUR)     
         
         for token in range(redTokens):
             baseYPos = 50
             tokenYPos = baseYPos - (3*token)
             
-            pygame.draw.circle(redTokenSurf, LIGHTRED, (30,tokenYPos), 30)
-            pygame.draw.circle(redTokenSurf, RED, (30,tokenYPos), 30, 1)
+            pygame.draw.circle(tableRedTokenSurf, LIGHTRED, (30,tokenYPos), 30)
+            pygame.draw.circle(tableRedTokenSurf, RED, (30,tokenYPos), 30, 1)
             # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
 
-        asurface.blit(redTokenSurf, redTokenRect)
+        asurface.blit(tableRedTokenSurf, tableRedTokenRect)
 
     if greenTokens:
-        greenTokenSurf.fill(NOCOLOUR)
+        tableGreenTokenSurf.fill(NOCOLOUR)
         for token in range(greenTokens):
 
             baseYPos = 50
             tokenYPos = baseYPos - (3*token)
             
-            pygame.draw.circle(greenTokenSurf, LIGHTGREEN, (30,tokenYPos), 30)
-            pygame.draw.circle(greenTokenSurf, GREEN, (30,tokenYPos), 30, 1)
+            pygame.draw.circle(tableGreenTokenSurf, LIGHTGREEN, (30,tokenYPos), 30)
+            pygame.draw.circle(tableGreenTokenSurf, GREEN, (30,tokenYPos), 30, 1)
             # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
-        asurface.blit(greenTokenSurf, greenTokenRect)
+        asurface.blit(tableGreenTokenSurf, tableGreenTokenRect)
+
+def drawPlayerTokens(asurface, tokens):
+    redTokens = tokens[red]
+    greenTokens = tokens[green]
+    blueTokens = tokens[blue]
+    whiteTokens = tokens[white]
+    blackTokens = tokens[black]
+    
+    if redTokens:
+        playerRedTokenSurf.fill(NOCOLOUR)     
+        
+        for token in range(redTokens):
+            baseYPos = 50
+            tokenYPos = baseYPos - (3*token)
+            
+            pygame.draw.circle(playerRedTokenSurf, LIGHTRED, (30,tokenYPos), 30)
+            pygame.draw.circle(playerRedTokenSurf, RED, (30,tokenYPos), 30, 1)
+            # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
+
+        asurface.blit(playerRedTokenSurf, playerRedTokenRect)
+
+    if greenTokens:
+        playerGreenTokenSurf.fill(NOCOLOUR)
+        for token in range(greenTokens):
+
+            baseYPos = 50
+            tokenYPos = baseYPos - (3*token)
+            
+            pygame.draw.circle(playerGreenTokenSurf, LIGHTGREEN, (30,tokenYPos), 30)
+            pygame.draw.circle(playerGreenTokenSurf, GREEN, (30,tokenYPos), 30, 1)
+            # pygame.draw.circle(asurface, BLACK, (100,tokenYPos), 30, 2)
+        asurface.blit(playerGreenTokenSurf, playerGreenTokenRect)
 
 def drawTokenAtMouse(x,y, color, asurface):
     movingTokenSurf = pygame.Surface((60, 60), pygame.SRCALPHA)
@@ -64,12 +93,12 @@ def drawTokenAtMouse(x,y, color, asurface):
 
 def getTokenClicked(x,y, tokens):
     
-    if redTokenRect.collidepoint(x, y):
+    if tableRedTokenRect.collidepoint(x, y):
         print('Clicked RED')
         tokens[red] -= 1
         print(f'There are now {tokens[red]} red tokens left.')
         return red, tokens
-    elif greenTokenRect.collidepoint(x, y):
+    elif tableGreenTokenRect.collidepoint(x, y):
         print('Clicked GREEN')
         tokens[green] -= 1
         print(f'There are now {tokens[green]} green tokens left.')
@@ -80,7 +109,8 @@ def getTokenClicked(x,y, tokens):
 
 
 def main():
-    global redTokenSurf, redTokenRect, greenTokenSurf, greenTokenRect
+    global tableRedTokenSurf, tableRedTokenRect, tableGreenTokenSurf, tableGreenTokenRect
+    global playerRedTokenSurf, playerRedTokenRect, playerGreenTokenSurf, playerGreenTokenRect
     pygame.init()
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
@@ -95,15 +125,34 @@ def main():
         yellow:3
     }
 
-    redTokenSurf = pygame.Surface((60,80), pygame.SRCALPHA)
-    redTokenSurf.fill(NOCOLOUR)
-    redTokenRect = redTokenSurf.get_rect()
-    redTokenRect.topleft = (100,100)
+    playerTokens = {
+        red:1,
+        green:1,
+        blue:1,
+        white:1,
+        black:1,
+        yellow:1
+    }
 
-    greenTokenSurf = pygame.Surface((60,80), pygame.SRCALPHA)
-    greenTokenSurf.fill(NOCOLOUR)
-    greenTokenRect = greenTokenSurf.get_rect()
-    greenTokenRect.topleft = (200,100)     
+    tableRedTokenSurf = pygame.Surface((60,80), pygame.SRCALPHA)
+    tableRedTokenSurf.fill(NOCOLOUR)
+    tableRedTokenRect = tableRedTokenSurf.get_rect()
+    tableRedTokenRect.topleft = (100,100)
+
+    tableGreenTokenSurf = pygame.Surface((60,80), pygame.SRCALPHA)
+    tableGreenTokenSurf.fill(NOCOLOUR)
+    tableGreenTokenRect = tableGreenTokenSurf.get_rect()
+    tableGreenTokenRect.topleft = (200,100)
+
+    playerRedTokenSurf = pygame.Surface((60,80), pygame.SRCALPHA)
+    playerRedTokenSurf.fill(NOCOLOUR)
+    playerRedTokenRect = playerRedTokenSurf.get_rect()
+    playerRedTokenRect.topleft = (WINDOWWIDTH-260,300)
+
+    playerGreenTokenSurf = pygame.Surface((60,80), pygame.SRCALPHA)
+    playerGreenTokenSurf.fill(NOCOLOUR)
+    playerGreenTokenRect = playerGreenTokenSurf.get_rect()
+    playerGreenTokenRect.topleft = (WINDOWWIDTH-160,300)     
 
     mouseDown = False
     tokenClicked = None
@@ -111,7 +160,8 @@ def main():
         checkForQuit()
         DISPLAYSURF.fill(GRAY)
 
-        drawTokens(DISPLAYSURF, tableTokens)
+        drawTableTokens(DISPLAYSURF, tableTokens)
+        drawPlayerTokens(DISPLAYSURF, playerTokens)
 
 
         
@@ -128,6 +178,9 @@ def main():
                 
             if event.type == MOUSEBUTTONUP:
                 mouseDown = False
+                if tokenClicked:
+                    print('Momentarily, a token is in possession.')
+                    
                 tokenClicked = None
 
         if mouseDown and tokenClicked:
